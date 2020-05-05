@@ -62,8 +62,8 @@ echo"<body>
 				    <div class='center'>
 				   		<div class='container' style='max-width:65em;'>";?>
 						  <center><button style="width: 300px; height: 100px; font-size:x-large; text-align: center; color: black; background-color: #F4D03F; border: none; border-radius: 3px;" onclick="window.location.href = 'Productos/agregarProductos.php'">Productos</button>
-						  <button style="width: 300px; height: 100px; font-size:x-large; text-align: center; color: black; background-color: #F4D03F; border: none; border-radius: 3px;" onclick="window.location.href = '../index.php'">Categorías</button>
-						  <button style="width: 300px; height: 100px; font-size:x-large; text-align: center; color: black; background-color: #F4D03F; border: none; border-radius: 3px;" onclick="window.location.href = '../index.php'">Diseño del menú</button></center>
+						  <button style="width: 300px; height: 100px; font-size:x-large; text-align: center; color: black; background-color: #F4D03F; border: none; border-radius: 3px;" onclick="window.location.href = 'Categorias/agregarCategorias.php'">Categorías</button>
+						  <button style="width: 300px; height: 100px; font-size:x-large; text-align: center; color: black; background-color: #F4D03F; border: none; border-radius: 3px;" onclick="window.location.href = 'MenuDesigner/plantillas.php'">Diseño del menú</button></center>
 
 						<?php echo"</div><!--cierra container-->
 						

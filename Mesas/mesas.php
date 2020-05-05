@@ -122,7 +122,7 @@ $mesa = "";
 
 	    	   	$id = $_GET['id'];
 
-	    	   	$borrar=mysqli_query($linck,"SELECT * FROM `mesas` WHERE `id_mesa` = '$id';");
+	    	   	$borrar=mysqli_query($linck,"SELECT * FROM `mesas` WHERE `id_mesa` = '$id' AND `id_propietario` = '$id_propietario';");
 
 			while ($rowb = mysqli_fetch_array($borrar))
 
@@ -130,7 +130,7 @@ $mesa = "";
 
 				
 
-	    	   	$reg=mysqli_query($linck,"UPDATE `mesas` SET estado = 0 WHERE `id_mesa` = '$id';");
+	    	   	$reg=mysqli_query($linck,"DELETE FROM `mesas` WHERE `id_mesa` = '$id' AND `id_propietario` = '$id_propietario';");
 
 	    	   	unlink($img);
 
@@ -142,18 +142,20 @@ $mesa = "";
 
 	    	   if(isset($_POST['QR']) || isset(($_POST['agregar']))){
 
-		    	   $mesa=$_POST['mesa'];
+		    	   //$mesa=$_POST['mesa'];
 
-			   $QR = $mesa.".png";
+			   //$QR = $mesa.".png";
 
 			   
 
 			   if(isset($_POST['QR']))
 
+				$mesa=$_POST['mesa'];	$QR=$mesa.'-'.$id_propietario.'.png';
 				QRcode::png($mesa, "QR/".$QR, QR_ECLEVEL_L,10,2);
 
-			   else if(isset($_POST['agregar'])){
+			   if(isset($_POST['agregar'])){
 
+			   	$mesa=$_POST['nom']; $QR=$mesa.'-'.$id_propietario.'.png';
 			   	$reg=mysqli_query($linck,"INSERT INTO `mesas` (`nombre`, `QR`, `id_propietario`) VALUES ('$mesa', '$QR', '$id_propietario');");	
 
 			   	$mesa = "";
@@ -187,11 +189,13 @@ $mesa = "";
 
 							       <div class='input-group input-group-icon' style='text-align:center'>
 
-								<img src='QR/".$mesa.".png'/>
+								<img src='QR/".$QR."'/>
+								<input type='hidden' name='nom' value='".$mesa."' />
 
 							       </div>";
 
 							 }
+							 else{
 
 						       echo"
 
@@ -202,17 +206,18 @@ $mesa = "";
 						        <div class='input-icon'><i class='fa fa-envelope'></i></div>
 
 						      </div><br><br><br>";
+						  	 }
 
 						      
 
 						      if(isset($_POST['QR'])){
 
-						      	echo"<input name='agregar' type='submit' id='agregar' value='Agregar'>";
+						      	echo"<input name='agregar' type='submit' id='accionform' value='Agregar'>";
 
 						      }
 						      else{
 
-						      	echo"<input name='QR' type='submit' id='agregar' value='Generar QR'>";
+						      	echo"<input name='QR' type='submit' id='accionform' value='Generar QR'>";
 
 						      }
 						    	
@@ -277,7 +282,7 @@ $mesa = "";
 
 						            <td style='width:20%'><a href='mesas.php?id=".$row['id_mesa']."'>
 
-						            <img src='img/cancelar.png' id='cancelar' height='20em' width='20em'></a></td>
+						            <img src='../img/cancelar.png' id='cancelar' height='20em' width='20em'></a></td>
 
 					            </tr>";
 
